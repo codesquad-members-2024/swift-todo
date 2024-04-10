@@ -29,7 +29,7 @@ class CardListViewController: UIViewController {
         setupTableView()
     }
     
-    func setupStackView() {
+    private func setupStackView() {
         stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
@@ -53,7 +53,7 @@ class CardListViewController: UIViewController {
         headerView.heightAnchor.constraint(equalToConstant: 80).isActive = true
     }
     
-    func setupTableView() {
+    private func setupTableView() {
         tableView = UITableView(frame: .zero, style: .plain)
         tableView.separatorStyle = .none
         tableView.backgroundColor = .systemGray5
