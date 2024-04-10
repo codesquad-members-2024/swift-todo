@@ -29,11 +29,12 @@ class CardListHeaderView: UIView {
         return badgeLabel
     }()
     
-    private let addButton: UIButton = {
+    private lazy var addButton: UIButton = { [unowned self] in
         let button = UIButton(type: .system)
         button.setTitle("+", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.addTarget(CardListHeaderView.self, action: #selector(addButtonTapped), for: .touchUpInside)
+        button.setTitleColor(.systemGray2, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 30)
+        button.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -66,7 +67,7 @@ class CardListHeaderView: UIView {
             badgeLabel.widthAnchor.constraint(greaterThanOrEqualTo: badgeLabel.heightAnchor),
             
             addButton.centerYAnchor.constraint(equalTo: badgeLabel.centerYAnchor),
-            addButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant:  -20)
+            addButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant:  -20),
         ])
     }
     

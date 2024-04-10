@@ -20,7 +20,7 @@ class ContainerViewController: UIViewController {
     private func setupStackView() {
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
-        stackView.spacing = 10
+        stackView.spacing = 30
         stackView.alignment = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackView)
@@ -42,9 +42,6 @@ class ContainerViewController: UIViewController {
             addChild(cardListVC)
             stackView.addArrangedSubview(cardListVC.view)
             cardListVC.didMove(toParent: self)
-            
-            cardListVC.view.translatesAutoresizingMaskIntoConstraints = false
-            cardListVC.view.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1/3, constant: -20/3).isActive = true
         }
     }
 }
