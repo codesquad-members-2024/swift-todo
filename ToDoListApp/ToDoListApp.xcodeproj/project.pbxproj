@@ -21,7 +21,10 @@
 		D6349CFA2BC3DE2B002BAE5D /* CardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6349CF92BC3DE2B002BAE5D /* CardTableViewCell.xib */; };
 		D6349CFB2BC3DE2B002BAE5D /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6349CF82BC3DE2B002BAE5D /* CardTableViewCell.swift */; };
 		D6349CFD2BC4D45C002BAE5D /* TodoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6349CFC2BC4D45C002BAE5D /* TodoCard.swift */; };
-		D6349D032BC4FA37002BAE5D /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6349D022BC4FA37002BAE5D /* ContainerViewController.swift */; };
+		D6349D052BC7BDEB002BAE5D /* CardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6349D042BC7BDEB002BAE5D /* CardManager.swift */; };
+		D6AEF9BE2BC7DA3E00A9E57A /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6AEF9BD2BC7DA3E00A9E57A /* EditView.swift */; };
+		D6D9116C2BCA8E3E00B207D3 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D9116B2BCA8E3E00B207D3 /* EditViewController.swift */; };
+		D6D9116E2BCAA7BF00B207D3 /* EditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6D9116D2BCAA7BF00B207D3 /* EditView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +63,10 @@
 		D6349CF82BC3DE2B002BAE5D /* CardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
 		D6349CF92BC3DE2B002BAE5D /* CardTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardTableViewCell.xib; sourceTree = "<group>"; };
 		D6349CFC2BC4D45C002BAE5D /* TodoCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCard.swift; sourceTree = "<group>"; };
-		D6349D022BC4FA37002BAE5D /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		D6349D042BC7BDEB002BAE5D /* CardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManager.swift; sourceTree = "<group>"; };
+		D6AEF9BD2BC7DA3E00A9E57A /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
+		D6D9116B2BCA8E3E00B207D3 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		D6D9116D2BCAA7BF00B207D3 /* EditView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				D6349CFC2BC4D45C002BAE5D /* TodoCard.swift */,
+				D6349D042BC7BDEB002BAE5D /* CardManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -152,11 +159,13 @@
 		D6349CFF2BC4DDFC002BAE5D /* CardList */ = {
 			isa = PBXGroup;
 			children = (
-				D6349D022BC4FA37002BAE5D /* ContainerViewController.swift */,
 				D6349CF62BC3C918002BAE5D /* CardListHeaderView.swift */,
 				D6349CF42BC3C8B8002BAE5D /* CardListViewController.swift */,
 				D6349CF82BC3DE2B002BAE5D /* CardTableViewCell.swift */,
 				D6349CF92BC3DE2B002BAE5D /* CardTableViewCell.xib */,
+				D6D9116B2BCA8E3E00B207D3 /* EditViewController.swift */,
+				D6AEF9BD2BC7DA3E00A9E57A /* EditView.swift */,
+				D6D9116D2BCAA7BF00B207D3 /* EditView.xib */,
 			);
 			path = CardList;
 			sourceTree = "<group>";
@@ -265,6 +274,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6D9116E2BCAA7BF00B207D3 /* EditView.xib in Resources */,
 				D6349CCE2BC3AAEE002BAE5D /* Assets.xcassets in Resources */,
 				D6349CD12BC3AAEE002BAE5D /* Base in Resources */,
 				D6349CCC2BC3AAED002BAE5D /* Base in Resources */,
@@ -293,13 +303,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6D9116C2BCA8E3E00B207D3 /* EditViewController.swift in Sources */,
 				D6349CF52BC3C8B8002BAE5D /* CardListViewController.swift in Sources */,
+				D6349D052BC7BDEB002BAE5D /* CardManager.swift in Sources */,
 				D6349CFD2BC4D45C002BAE5D /* TodoCard.swift in Sources */,
 				D6349CFB2BC3DE2B002BAE5D /* CardTableViewCell.swift in Sources */,
 				D6349CC92BC3AAED002BAE5D /* MainViewController.swift in Sources */,
+				D6AEF9BE2BC7DA3E00A9E57A /* EditView.swift in Sources */,
 				D6349CC52BC3AAED002BAE5D /* AppDelegate.swift in Sources */,
 				D6349CC72BC3AAED002BAE5D /* SceneDelegate.swift in Sources */,
-				D6349D032BC4FA37002BAE5D /* ContainerViewController.swift in Sources */,
 				D6349CF72BC3C918002BAE5D /* CardListHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
