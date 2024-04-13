@@ -8,6 +8,8 @@
 import UIKit
 
 class CardListHeaderView: UIView {
+    var addButtonAction: (() -> Void)?
+    
     let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .bold)
@@ -72,6 +74,6 @@ class CardListHeaderView: UIView {
     }
     
     @objc func addButtonTapped(sender: UIButton) {
-        print("헤더 add버튼 탭")
+        addButtonAction?()
     }
 }

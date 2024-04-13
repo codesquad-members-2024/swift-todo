@@ -21,7 +21,6 @@ class CardTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
     }
     
     func setupView() {
@@ -30,7 +29,6 @@ class CardTableViewCell: UITableViewCell {
         
         cardBackgroundView.layer.cornerRadius = 10
         cardBackgroundView.clipsToBounds = true
-        
     }
     
     func configure(with card: ToDoCard) {
