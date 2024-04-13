@@ -14,8 +14,17 @@ enum CardStatus {
 }
 
 struct ToDoCard {
+    let id: UUID
     let title: String
     let description: String
     let platform: String
     let status: CardStatus
+    
+    init(title: String, description: String, platform: String, status: CardStatus) {
+        self.id = UUID()
+        self.title = title
+        self.description = description
+        self.platform = platform
+        self.status = status
+    }
 }
