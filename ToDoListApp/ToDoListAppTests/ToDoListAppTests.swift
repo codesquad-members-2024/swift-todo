@@ -9,28 +9,42 @@ import XCTest
 @testable import ToDoListApp
 
 final class ToDoListAppTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    var cardManager: CardManager!
+    var testCard: ToDoCard!
+    let mockNotificationCenter = NotificationCenter()
+    
+    override func setUp() {
+        super.setUp()
+        
+        testCard = ToDoCard(title: "Test Title", description: "Test Description", platform: "iOS", status: .toDO)
+        cardManager = CardManager(cards: [testCard], notificationCenter: mockNotificationCenter)
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    override func tearDown() {
+        cardManager = nil
+        testCard = nil
+        super.tearDown()
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func testCardsForStatus() {
+        let cards = cardManager.cards(for: .toDO)
+        XCTAssertTrue(cards.contains { $0.id == testCard.id }, "카드 매니저가 올바른 상태의 카드를 반환해야 합니다.")
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testAddCard() {
+        let newCard = ToDoCard(title: "New title", description: "New description", platform: "iOS", status: .inProgress)
+        cardManager.addCard(newCard)
+        XCTAssertEqual(cardManager.count, 2, "카드 추가 후 카드 count가 일치해야 합니다.")
     }
-
+    
+    func testRemoveCard() {
+        cardManager.removeCard(by: testCard.id)
+        XCTAssertEqual(cardManager.count, 0, "카드 제거 후 카드 count가 일치해야 합니다.")
+    }
+    
+    func testFindCard() {
+        let foundCard = cardManager.findCard(by: testCard.id)
+        XCTAssertNotNil(foundCard, "ID로 카드를 검색했을 때 카드가 존재해야 합니다.")
+        XCTAssertEqual(foundCard?.title, testCard.title, "찾아진 카드는 요청된 카드와 동일해야 합니다.")
+    }
 }

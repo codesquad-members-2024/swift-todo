@@ -8,7 +8,7 @@
 import UIKit
 
 extension Notification.Name {
-    static let NewCardAdded = Notification.Name("NewCardAdded")
+    public static let NewCardAdded = Notification.Name("NewCardAdded")
 }
 
 class CardListViewController: UIViewController {
