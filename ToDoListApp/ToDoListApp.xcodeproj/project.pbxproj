@@ -25,6 +25,8 @@
 		D6AEF9BE2BC7DA3E00A9E57A /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6AEF9BD2BC7DA3E00A9E57A /* EditView.swift */; };
 		D6D9116C2BCA8E3E00B207D3 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D9116B2BCA8E3E00B207D3 /* EditViewController.swift */; };
 		D6D9116E2BCAA7BF00B207D3 /* EditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6D9116D2BCAA7BF00B207D3 /* EditView.xib */; };
+		D6D911712BCAFBB500B207D3 /* CardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6349D042BC7BDEB002BAE5D /* CardManager.swift */; };
+		D6D911722BCAFBB700B207D3 /* TodoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6349CFC2BC4D45C002BAE5D /* TodoCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -320,7 +322,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6D911722BCAFBB700B207D3 /* TodoCard.swift in Sources */,
 				D6349CDC2BC3AAEF002BAE5D /* ToDoListAppTests.swift in Sources */,
+				D6D911712BCAFBB500B207D3 /* CardManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

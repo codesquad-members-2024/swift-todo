@@ -11,9 +11,11 @@ import os
 class CardManager {
     private var cards: [ToDoCard]
     private let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "CardManager")
+    private let notificationCenter: NotificationCenter
 
-    init(cards: [ToDoCard] = []) {
+    init(cards: [ToDoCard] = [], notificationCenter: NotificationCenter = .default) {
         self.cards = cards
+        self.notificationCenter = notificationCenter
     }
     
     var count: Int {
@@ -31,7 +33,7 @@ class CardManager {
     func addCard(_ card: ToDoCard) {
         logger.log(level: .info, "[ 생성된 카드 ]: \(String(describing: card)). \n[ 총 cards 갯수 ]: \(self.cards.count + 1)")
         self.cards.append(card)
-        NotificationCenter.default.post(name: .NewCardAdded, object: nil, userInfo: ["newCard": card])
+        notificationCenter.post(name: .NewCardAdded, object: nil, userInfo: ["newCard": card])
     }
     
     func removeCard(by id: UUID) {
