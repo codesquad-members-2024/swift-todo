@@ -10,12 +10,12 @@ import UIKit
 class CardListViewController: UIViewController {
     var tableView: UITableView!
     var stackView: UIStackView!
-    var cardManager: CardManager
+    var cardManager: CardManaging
     var headerView: CardListHeaderView!
     let headerTitle: String
     let cardStatus: CardStatus
     
-    init(headerTitle: String, cardManager: CardManager, cardStatus: CardStatus) {
+    init(headerTitle: String, cardManager: CardManaging, cardStatus: CardStatus) {
         self.headerTitle = headerTitle
         self.cardManager = cardManager
         self.cardStatus = cardStatus
@@ -80,7 +80,7 @@ class CardListViewController: UIViewController {
     }
     
     private func addNewCard() {
-        let editVC = EditViewController(cardManager: cardManager, cardStatus: self.cardStatus)
+        let editVC = EditViewController(cardManager: cardManager as! CardManager, cardStatus: self.cardStatus)
         editVC.modalPresentationStyle = .overFullScreen
         
         self.present(editVC, animated: true)

@@ -8,7 +8,14 @@
 import Foundation
 import os
 
-class CardManager {
+protocol CardManaging {
+    var count: Int { get }
+    func cards(for status: CardStatus) -> [ToDoCard]
+    func addCard(_ card: ToDoCard)
+    func removeCard(by id: UUID)
+}
+
+class CardManager: CardManaging {
     enum Notifications {
         static let NewCardAdded = Notification.Name("NewCardAdded")
     }

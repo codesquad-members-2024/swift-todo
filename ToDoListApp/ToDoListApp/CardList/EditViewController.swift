@@ -10,9 +10,9 @@ import UIKit
 class EditViewController: UIViewController {
     var editView: EditView!
     var cardStatus: CardStatus
-    var cardManager: CardManager
+    var cardManager: CardManaging
     
-    init(cardManager: CardManager, cardStatus: CardStatus) {
+    init(cardManager: CardManaging, cardStatus: CardStatus) {
         self.cardManager = cardManager
         self.cardStatus = cardStatus
         super.init(nibName: nil, bundle: nil)
