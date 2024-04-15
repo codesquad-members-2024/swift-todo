@@ -65,8 +65,8 @@ class EditViewController: UIViewController {
     }
 
     private func addNewCard(title: String, content: String) {
-        let newCard = ToDoCard(title: title, description: content, platform: "iOS", status: self.cardStatus)
-        cardManager.addCard(newCard)
+        let newCard = ToDoCard(title: title, description: content, platform: "iOS")
+        cardManager.addCard(newCard, with: self.cardStatus)
         dismiss(animated: true, completion: nil)
     }
 }
