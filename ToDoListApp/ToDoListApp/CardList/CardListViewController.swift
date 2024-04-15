@@ -7,10 +7,6 @@
 
 import UIKit
 
-extension Notification.Name {
-    public static let NewCardAdded = Notification.Name("NewCardAdded")
-}
-
 class CardListViewController: UIViewController {
     var tableView: UITableView!
     var stackView: UIStackView!
@@ -37,13 +33,13 @@ class CardListViewController: UIViewController {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(handleNewCardAdded),
-                                               name: .NewCardAdded,
+                                               name: CardManager.Notifications.NewCardAdded,
                                                object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: .NewCardAdded, object: nil)
+        NotificationCenter.default.removeObserver(self, name: CardManager.Notifications.NewCardAdded, object: nil)
     }
     
     override func viewDidLoad() {

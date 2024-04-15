@@ -11,13 +11,12 @@ import XCTest
 final class ToDoListAppTests: XCTestCase {
     var cardManager: CardManager!
     var testCard: ToDoCard!
-    let mockNotificationCenter = NotificationCenter()
     
     override func setUp() {
         super.setUp()
         
         testCard = ToDoCard(title: "Test Title", description: "Test Description", platform: "iOS", status: .toDO)
-        cardManager = CardManager(cards: [testCard], notificationCenter: mockNotificationCenter)
+        cardManager = CardManager(cards: [testCard])
     }
     
     override func tearDown() {
