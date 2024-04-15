@@ -22,6 +22,7 @@ class EditView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()
+        updateButtonStyle(isEnabled: okButton.isEnabled)
     }
     
     private func setupView() {
@@ -33,8 +34,9 @@ class EditView: UIView {
         content.layer.borderColor = UIColor.systemGray5.cgColor
         
         okButton.layer.cornerRadius = 10
-        okButton.layer.borderWidth = 1.0
-        okButton.layer.borderColor = UIColor.black.cgColor
+        // 해결하지 못함
+        //        okButton.setTitleColor(.red, for: .normal)
+        //        okButton.setTitleColor(.white, for: .disabled)
         
         cancelButton.layer.cornerRadius = 10
         cancelButton.layer.borderWidth = 1.0
@@ -42,6 +44,10 @@ class EditView: UIView {
         
         cancelButton.addTarget(self, action: #selector(didTapCancel), for: .touchUpInside)
         okButton.addTarget(self, action: #selector(didTapOK), for: .touchUpInside)
+    }
+    
+    private func updateButtonStyle(isEnabled: Bool) {
+        okButton.backgroundColor = isEnabled ? .black : .systemGray3
     }
     
     @objc private func didTapCancel() {
@@ -61,11 +67,13 @@ extension EditView: UITextViewDelegate {
         let currentText = textView.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updateText = currentText.replacingCharacters(in: stringRange, with: text)
-
+        
         return updateText.count <= 500
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        okButton.isEnabled = textView.text.count <= 500 && !(textView.text.isEmpty) && !(title.text?.isEmpty ?? true)
+        let isEnabled = textView.text.count <= 500 && !(textView.text.isEmpty) && !(title.text?.isEmpty ?? true)
+        okButton.isEnabled = isEnabled
+        updateButtonStyle(isEnabled: isEnabled)
     }
 }

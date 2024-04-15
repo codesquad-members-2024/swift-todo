@@ -41,12 +41,16 @@ class EditViewController: UIViewController {
     }
     
     private func configureLayout() {
+        editView.layer.cornerRadius = 10
+        editView.layer.borderWidth = 1
+        editView.layer.borderColor = UIColor.black.cgColor
+        
         editView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             editView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             editView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             editView.widthAnchor.constraint(equalToConstant: 428),
-            editView.heightAnchor.constraint(equalToConstant: 212)
+            editView.heightAnchor.constraint(equalToConstant: 240)
         ])
     }
 
