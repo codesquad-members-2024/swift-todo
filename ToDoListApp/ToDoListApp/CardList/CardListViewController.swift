@@ -76,7 +76,7 @@ class CardListViewController: UIViewController {
     }
     
     private func updateHeaderBadge() {
-        headerView.badgeLabel.text = "\(cardManager.cards(for: cardStatus).count)"
+        headerView.badgeLabel.text = "\(cardManager.count(for: cardStatus))"
     }
     
     private func addNewCard() {
@@ -112,13 +112,15 @@ class CardListViewController: UIViewController {
 extension CardListViewController: UITableViewDataSource, UITableViewDelegate {
     // MARK: - dataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cardManager.cards(for: cardStatus).count
+        return cardManager.count(for: cardStatus)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CardTableViewCell", for: indexPath) as! CardTableViewCell
-        let card = cardManager.cards(for: cardStatus)[indexPath.row]
-        cell.configure(with: card)
+        if let card = cardManager.card(for: cardStatus, at: indexPath.row) {
+            cell.configure(with: card)
+        }
+        
         return cell
     }
     

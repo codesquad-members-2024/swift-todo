@@ -10,7 +10,8 @@ import os
 
 protocol CardManaging {
     var count: Int { get }
-    func cards(for status: CardStatus) -> [ToDoCard]
+    func count(for status: CardStatus) -> Int
+    func card(for status: CardStatus, at index: Int) -> ToDoCard?
     func addCard(_ card: ToDoCard)
     func removeCard(by id: UUID)
 }
@@ -31,8 +32,14 @@ class CardManager: CardManaging {
         return self.cards.count
     }
     
-    func cards(for status: CardStatus) -> [ToDoCard] {
-        return cards.filter { $0.status == status}
+    func count(for status: CardStatus) -> Int {
+        return cards.filter { $0.status == status }.count
+    }
+    
+    func card(for status: CardStatus, at index: Int) -> ToDoCard? {
+        let filteredCards = cards.filter { $0.status == status }
+        guard index >= 0 && index < filteredCards.count else { return nil }
+        return filteredCards[index]
     }
     
     func findCard(by id: UUID) -> ToDoCard? {
