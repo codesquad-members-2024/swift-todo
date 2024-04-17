@@ -35,11 +35,17 @@ class CardListViewController: UIViewController {
                                                selector: #selector(handleNewCardAdded),
                                                name: CardManager.Notifications.NewCardAdded,
                                                object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handleCardMoved),
+                                               name: CardManager.Notifications.CardMoved,
+                                               object: nil
+        )
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: CardManager.Notifications.NewCardAdded, object: nil)
+        NotificationCenter.default.removeObserver(self, name: CardManager.Notifications.CardMoved, object: nil)
     }
     
     override func viewDidLoad() {
@@ -103,8 +109,23 @@ class CardListViewController: UIViewController {
     }
     
     // MARK: - Notification Handlers
-    @objc func handleNewCardAdded(notification: Notification) {
+    @objc private func handleNewCardAdded(notification: Notification) {
         updateHeaderBadge()
+        self.tableView.reloadData()
+    }
+    
+    @objc private func handleCardMoved(notification: Notification) {
+        guard let userInfo = notification.userInfo,
+                  let cardId = userInfo["cardId"] as? UUID,
+                  let card = cardManager.card(for: cardStatus, with: cardId),
+                  let newIndex = cardManager.index(of: card, in: cardStatus) else { return }
+        
+        if let oldIndex = tableView.indexPathsForVisibleRows?.first(where: { indexPath in
+            guard let visibleCard = cardManager.card(for: cardStatus, at: indexPath.row) else { return false }
+            return visibleCard.id == cardId
+        }) {
+            tableView.moveRow(at: oldIndex, to: IndexPath(row: newIndex, section: 0))
+        }
         self.tableView.reloadData()
     }
 }

@@ -33,7 +33,7 @@ class CardTableViewCell: UITableViewCell {
     
     func configure(with card: ToDoCard) {
         titleLabel.text = card.title
-        descriptionLabel.text = card.description
+        descriptionLabel.text = card.descriptionText
         platformLabel.text = "author by \(card.platform)"
     }
 }
