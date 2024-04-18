@@ -24,8 +24,7 @@
                     <rect key="frame" x="26" y="82.5" width="376" height="54"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="54" id="Orm-uZ-nhW"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="54" id="ySz-x7-nZ5"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="54" id="7jP-76-2dP"/>
                     </constraints>
                     <color key="textColor" systemColor="labelColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -40,7 +39,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" spacing="47" translatesAutoresizingMaskIntoConstraints="NO" id="zV3-BC-12G">
-                    <rect key="frame" x="26" y="160.5" width="376" height="32"/>
+                    <rect key="frame" x="26" y="164" width="376" height="32"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfo-Eb-okB">
                             <rect key="frame" x="0.0" y="0.0" width="164.5" height="32"/>
@@ -50,10 +49,10 @@
                                 <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </buttonConfiguration>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8y3-Eh-bhC">
+                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8y3-Eh-bhC">
                             <rect key="frame" x="211.5" y="0.0" width="164.5" height="32"/>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" title="Button"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <buttonConfiguration key="configuration" style="plain" title="만들기">
                                 <fontDescription key="titleFontDescription" type="boldSystem" pointSize="14"/>
                                 <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -71,7 +70,7 @@
                 <constraint firstItem="YY4-fH-m3C" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="26" id="86f-Vq-bcE"/>
                 <constraint firstItem="zV3-BC-12G" firstAttribute="trailing" secondItem="OaO-6Z-Oy0" secondAttribute="trailing" id="8X3-LY-lmf"/>
                 <constraint firstItem="9pe-9m-vXT" firstAttribute="top" secondItem="YY4-fH-m3C" secondAttribute="bottom" constant="8" id="BkH-3W-9yy"/>
-                <constraint firstItem="zV3-BC-12G" firstAttribute="top" secondItem="OaO-6Z-Oy0" secondAttribute="bottom" constant="24" id="CyJ-lb-93e"/>
+                <constraint firstAttribute="bottom" secondItem="zV3-BC-12G" secondAttribute="bottom" constant="16" id="C55-Vx-C9W"/>
                 <constraint firstItem="YY4-fH-m3C" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="DNW-7g-K8b"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="9pe-9m-vXT" secondAttribute="trailing" constant="26" id="DWQ-xa-6Vi"/>
                 <constraint firstItem="OaO-6Z-Oy0" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="26" id="Dy7-xa-hbd"/>
@@ -81,6 +80,7 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="YY4-fH-m3C" secondAttribute="trailing" constant="26" id="aCt-b8-OYn"/>
                 <constraint firstItem="zV3-BC-12G" firstAttribute="leading" secondItem="OaO-6Z-Oy0" secondAttribute="leading" id="am4-VU-m5J"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="OaO-6Z-Oy0" secondAttribute="trailing" constant="26" id="tPW-bd-MnQ"/>
+                <constraint firstItem="zV3-BC-12G" firstAttribute="top" relation="greaterThanOrEqual" secondItem="OaO-6Z-Oy0" secondAttribute="bottom" constant="27.5" id="vTN-Aw-Vsj"/>
                 <constraint firstItem="OaO-6Z-Oy0" firstAttribute="top" secondItem="9pe-9m-vXT" secondAttribute="bottom" constant="8" id="wgw-gK-hR0"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

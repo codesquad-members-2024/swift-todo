@@ -10,9 +10,9 @@ import UIKit
 class EditViewController: UIViewController {
     var editView: EditView!
     var cardStatus: CardStatus
-    var cardManager: CardManager
+    var cardManager: CardManaging
     
-    init(cardManager: CardManager, cardStatus: CardStatus) {
+    init(cardManager: CardManaging, cardStatus: CardStatus) {
         self.cardManager = cardManager
         self.cardStatus = cardStatus
         super.init(nibName: nil, bundle: nil)
@@ -41,12 +41,16 @@ class EditViewController: UIViewController {
     }
     
     private func configureLayout() {
+        editView.layer.cornerRadius = 10
+        editView.layer.borderWidth = 1
+        editView.layer.borderColor = UIColor.black.cgColor
+        
         editView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             editView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             editView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             editView.widthAnchor.constraint(equalToConstant: 428),
-            editView.heightAnchor.constraint(equalToConstant: 212)
+            editView.heightAnchor.constraint(equalToConstant: 240)
         ])
     }
 
@@ -61,8 +65,8 @@ class EditViewController: UIViewController {
     }
 
     private func addNewCard(title: String, content: String) {
-        let newCard = ToDoCard(title: title, description: content, platform: "iOS", status: self.cardStatus)
-        cardManager.addCard(newCard)
+        let newCard = ToDoCard(title: title, descriptionText: content, platform: "iOS")
+        cardManager.addCard(newCard, with: self.cardStatus)
         dismiss(animated: true, completion: nil)
     }
 }
