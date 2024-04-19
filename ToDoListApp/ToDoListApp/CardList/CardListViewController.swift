@@ -40,12 +40,18 @@ class CardListViewController: UIViewController {
                                                name: CardManager.Notifications.CardMoved,
                                                object: nil
         )
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handleCardDeleted),
+                                               name: CardManager.Notifications.CardDeleted,
+                                               object: nil
+        )
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: CardManager.Notifications.NewCardAdded, object: nil)
         NotificationCenter.default.removeObserver(self, name: CardManager.Notifications.CardMoved, object: nil)
+        NotificationCenter.default.removeObserver(self, name: CardManager.Notifications.CardDeleted, object: nil)
     }
     
     override func viewDidLoad() {
@@ -128,6 +134,11 @@ class CardListViewController: UIViewController {
         }
         self.tableView.reloadData()
     }
+    
+    @objc private func handleCardDeleted(notification: Notification) {
+        updateHeaderBadge()
+        self.tableView.reloadData()
+    }
 }
 
 extension CardListViewController: UITableViewDataSource, UITableViewDelegate {
@@ -149,5 +160,44 @@ extension CardListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         print("\(headerTitle): \(indexPath.row)")
+    }
+    
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
+            let moveToCompleted = UIAction(title: "완료한 일로 이동", image: UIImage(systemName: "arrowshape.right.fill")) { action in
+                guard let card = self.cardManager.card(for: self.cardStatus, at: indexPath.row) else { return }
+                self.cardManager.removeCard(by: card.id)
+                self.cardManager.addCard(card, with: .done)
+                self.tableView.reloadData()
+            }
+            
+            let edit = UIAction(title: "수정하기", image: UIImage(systemName: "pencil")) { action in
+                guard let card = self.cardManager.card(for: self.cardStatus, at: indexPath.row) else { return }
+                
+                let editVC = EditViewController(cardManager: self.cardManager, cardStatus: self.cardStatus)
+                editVC.modalPresentationStyle = .overFullScreen
+                
+                editVC.loadViewIfNeeded()
+                editVC.editView.configure(with: .edit(card))
+                
+                editVC.editView.onOkTapped = { title, description in
+                    var updatedCard = card
+                    updatedCard.title = title
+                    updatedCard.descriptionText = description
+                    self.cardManager.updateCard(updatedCard)
+                    self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                    editVC.dismiss(animated: true, completion: nil)
+                }
+                
+                self.present(editVC, animated: true)
+            }
+            
+            let delete = UIAction(title: "삭제하기", image: UIImage(systemName: "trash"), attributes: .destructive) { action in
+                guard let card = self.cardManager.card(for: self.cardStatus, at: indexPath.row) else { return }
+                self.cardManager.removeCard(by: card.id)
+            }
+            
+            return UIMenu(title: "", children: [moveToCompleted, edit, delete])
+        }
     }
 }

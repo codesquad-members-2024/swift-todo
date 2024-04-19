@@ -123,6 +123,7 @@
 				D6349CC62BC3AAED002BAE5D /* SceneDelegate.swift */,
 				D6349CC82BC3AAED002BAE5D /* MainViewController.swift */,
 				D6349CFF2BC4DDFC002BAE5D /* CardList */,
+				D6D911732BD20BBE00B207D3 /* Edit */,
 				D6349CFE2BC4D460002BAE5D /* Model */,
 				D6349CCA2BC3AAED002BAE5D /* Main.storyboard */,
 				D6349CCD2BC3AAEE002BAE5D /* Assets.xcassets */,
@@ -165,11 +166,18 @@
 				D6349CF42BC3C8B8002BAE5D /* CardListViewController.swift */,
 				D6349CF82BC3DE2B002BAE5D /* CardTableViewCell.swift */,
 				D6349CF92BC3DE2B002BAE5D /* CardTableViewCell.xib */,
+			);
+			path = CardList;
+			sourceTree = "<group>";
+		};
+		D6D911732BD20BBE00B207D3 /* Edit */ = {
+			isa = PBXGroup;
+			children = (
 				D6D9116B2BCA8E3E00B207D3 /* EditViewController.swift */,
 				D6AEF9BD2BC7DA3E00A9E57A /* EditView.swift */,
 				D6D9116D2BCAA7BF00B207D3 /* EditView.xib */,
 			);
-			path = CardList;
+			path = Edit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

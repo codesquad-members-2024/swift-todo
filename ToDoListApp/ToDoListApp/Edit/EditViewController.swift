@@ -44,6 +44,7 @@ class EditViewController: UIViewController {
         editView.layer.cornerRadius = 10
         editView.layer.borderWidth = 1
         editView.layer.borderColor = UIColor.black.cgColor
+        editView.configure(with: .add)
         
         editView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

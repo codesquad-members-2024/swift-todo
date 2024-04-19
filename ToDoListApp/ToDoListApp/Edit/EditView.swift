@@ -8,6 +8,10 @@
 import UIKit
 
 class EditView: UIView {
+    enum Mode {
+        case add
+        case edit(ToDoCard)
+    }
     
     @IBOutlet weak var aboutLabel: UILabel!
     @IBOutlet weak var title: UITextField!
@@ -19,11 +23,32 @@ class EditView: UIView {
     var onCancelTapped: (() -> Void)?
     
     let placeholderText = "상세 내용을 입력해주세요"
+    var mode: Mode = .add
     
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()
-        updateButtonStyle(isEnabled: okButton.isEnabled)
+        
+    }
+    
+    func configure(with mode: Mode) {
+        self.mode = mode
+        setupMode()
+    }
+    
+    private func setupMode() {
+        switch mode {
+        case .add:
+            aboutLabel.text = "새 카드 추가하세용"
+            title.text = ""
+            content.text = placeholderText
+        case .edit(let card):
+            aboutLabel.text = "카드 수정하기"
+            title.text = card.title
+            content.text = card.descriptionText
+            content.textColor = .black
+        }
+        updateButtonStyle()
     }
     
     private func setupView() {
@@ -37,9 +62,6 @@ class EditView: UIView {
         content.layer.borderColor = UIColor.systemGray5.cgColor
         
         okButton.layer.cornerRadius = 10
-        // 해결하지 못함
-        //        okButton.setTitleColor(.red, for: .normal)
-        //        okButton.setTitleColor(.white, for: .disabled)
         
         cancelButton.layer.cornerRadius = 10
         cancelButton.layer.borderWidth = 1.0
@@ -49,7 +71,9 @@ class EditView: UIView {
         okButton.addTarget(self, action: #selector(didTapOK), for: .touchUpInside)
     }
     
-    private func updateButtonStyle(isEnabled: Bool) {
+    private func updateButtonStyle() {
+        let isEnabled = !(content.text.isEmpty || content.text == placeholderText) && !(title.text?.isEmpty ?? true)
+        okButton.isEnabled = isEnabled
         okButton.backgroundColor = isEnabled ? .black : .systemGray3
     }
     
@@ -91,6 +115,6 @@ extension EditView: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         let isEnabled = textView.text.count <= 500 && !(textView.text.isEmpty) && !(title.text?.isEmpty ?? true)
         okButton.isEnabled = isEnabled
-        updateButtonStyle(isEnabled: isEnabled)
+        updateButtonStyle()
     }
 }
