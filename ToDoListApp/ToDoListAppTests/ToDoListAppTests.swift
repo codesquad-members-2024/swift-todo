@@ -15,7 +15,7 @@ final class ToDoListAppTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        testCard = ToDoCard(title: "Test Title", description: "Test Description", platform: "iOS")
+        testCard = ToDoCard(title: "Test Title", descriptionText: "Test Description", platform: "iOS")
         cardManager = CardManager()
         cardManager.addCard(testCard, with: .toDO)
     }
@@ -32,7 +32,7 @@ final class ToDoListAppTests: XCTestCase {
     }
     
     func testAddCard() {
-        let newCard = ToDoCard(title: "New title", description: "New description", platform: "iOS")
+        let newCard = ToDoCard(title: "New title", descriptionText: "New description", platform: "iOS")
         cardManager.addCard(newCard, with: .inProgress)
         XCTAssertEqual(cardManager.totalCount, 2, "카드 추가 후 카드 count가 일치해야 합니다.")
     }

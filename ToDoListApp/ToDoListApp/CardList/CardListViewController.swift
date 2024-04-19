@@ -105,8 +105,6 @@ class CardListViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         stackView.addArrangedSubview(tableView)
         
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 100
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -137,7 +135,6 @@ class CardListViewController: UIViewController {
     
     @objc private func handleCardDeleted(notification: Notification) {
         updateHeaderBadge()
-        self.tableView.reloadData()
     }
 }
 
@@ -162,6 +159,12 @@ extension CardListViewController: UITableViewDataSource, UITableViewDelegate {
         print("\(headerTitle): \(indexPath.row)")
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard let card = self.cardManager.card(for: self.cardStatus, at: indexPath.row) else { return }
+        self.cardManager.removeCard(by: card.id)
+        tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
             let moveToCompleted = UIAction(title: "완료한 일로 이동", image: UIImage(systemName: "arrowshape.right.fill")) { action in
@@ -181,7 +184,7 @@ extension CardListViewController: UITableViewDataSource, UITableViewDelegate {
                 editVC.editView.configure(with: .edit(card))
                 
                 editVC.editView.onOkTapped = { title, description in
-                    var updatedCard = card
+                    let updatedCard = card
                     updatedCard.title = title
                     updatedCard.descriptionText = description
                     self.cardManager.updateCard(updatedCard)
@@ -195,6 +198,7 @@ extension CardListViewController: UITableViewDataSource, UITableViewDelegate {
             let delete = UIAction(title: "삭제하기", image: UIImage(systemName: "trash"), attributes: .destructive) { action in
                 guard let card = self.cardManager.card(for: self.cardStatus, at: indexPath.row) else { return }
                 self.cardManager.removeCard(by: card.id)
+                tableView.deleteRows(at: [indexPath], with: .fade)
             }
             
             return UIMenu(title: "", children: [moveToCompleted, edit, delete])

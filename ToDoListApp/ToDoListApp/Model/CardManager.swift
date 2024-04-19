@@ -95,6 +95,7 @@ class CardManager: CardManaging {
     }
     
     func removeCard(by id: UUID) {
+        logger.log(level: .info, "[ 삭제되는 카드 ]: \(String(describing: self.cards[id])).\n[ 삭제되는 카드 Status ]: \(String(describing: self.statuses[id])) \n[ 총 cards 갯수 ]: \(self.cards.count - 1)")
         cards.removeValue(forKey: id)
         statuses.removeValue(forKey: id)
         NotificationCenter.default.post(name: Self.Notifications.CardDeleted, object: nil)
