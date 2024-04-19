@@ -16,8 +16,8 @@ enum CardStatus {
 
 class ToDoCard: NSObject, Codable {
     let id: UUID
-    let title: String
-    let descriptionText: String
+    var title: String
+    var descriptionText: String
     let platform: String
     
     init(title: String, descriptionText: String, platform: String) {

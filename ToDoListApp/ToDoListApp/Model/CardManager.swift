@@ -18,12 +18,14 @@ protocol CardManaging {
     func moveCard(from oldIndex: Int, to newIndex: Int, within status: CardStatus)
     func index(of card: ToDoCard, in status: CardStatus) -> Int?
     func card(for status: CardStatus, with id: UUID) -> ToDoCard?
+    func updateCard(_ updatedCard: ToDoCard)
 }
 
 class CardManager: CardManaging {
     enum Notifications {
         static let NewCardAdded = Notification.Name("NewCardAdded")
         static let CardMoved = Notification.Name("CardMoved")
+        static let CardDeleted = Notification.Name("CardDeleted")
     }
     
     private var cards: [UUID: ToDoCard] = [:]
@@ -39,7 +41,7 @@ class CardManager: CardManaging {
     }
     
     func index(of card: ToDoCard, in status: CardStatus) -> Int? {
-        let sortedCards = cards(for: status).sorted { $0.id.uuidString < $1.id.uuidString }
+        let sortedCards = cards(for: status)
         return sortedCards.firstIndex { $0.id == card.id }
     }
     
@@ -63,9 +65,9 @@ class CardManager: CardManaging {
     }
     
     func addCard(_ card: ToDoCard, with status: CardStatus) {
-        logger.log(level: .info, "[ 생성된 카드 ]: \(String(describing: card.description)). \n[ 총 cards 갯수 ]: \(self.cards.count + 1)")
         cards[card.id] = card
         statuses[card.id] = status
+        logger.log(level: .info, "[ 생성된 카드 ]: \(String(describing: card.description)).\n[ 카드 Status ]: \(String(describing: self.statuses[card.id])) \n[ 총 cards 갯수 ]: \(self.cards.count)")
         NotificationCenter.default.post(name: Self.Notifications.NewCardAdded, object: nil, userInfo: ["newCard": card])
     }
     
@@ -95,5 +97,10 @@ class CardManager: CardManaging {
     func removeCard(by id: UUID) {
         cards.removeValue(forKey: id)
         statuses.removeValue(forKey: id)
+        NotificationCenter.default.post(name: Self.Notifications.CardDeleted, object: nil)
+    }
+    
+    func updateCard(_ updatedCard: ToDoCard) {
+        cards[updatedCard.id] = updatedCard
     }
 }
