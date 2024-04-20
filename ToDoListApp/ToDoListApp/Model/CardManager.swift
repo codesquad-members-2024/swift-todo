@@ -87,7 +87,7 @@ class CardManager: CardManaging {
         
         cards[cardId] = cardToMove
         
-        NotificationCenter.default.post(name: Self.Notifications.CardMoved, object: nil, userInfo: ["cardId": cardId])
+        NotificationCenter.default.post(name: Self.Notifications.CardMoved, object: nil, userInfo: ["indexInfo": (oldIndex: oldIndex, newIndex: newIndex)])
     }
     
     func containsCard(with id: UUID) -> Bool {

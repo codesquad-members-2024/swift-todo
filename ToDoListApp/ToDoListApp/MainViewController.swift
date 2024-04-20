@@ -36,10 +36,12 @@ class MainViewController: UIViewController {
     }
     
     private func addCardListControllers() {
-        let statuses: [(String, CardStatus)] = [("해야할 일", .toDO), ("하고 있는 일", .inProgress), ("완료한 일", .done)]
+        let statuses: [(name: String, status: CardStatus)] = [(name: "해야할 일", status: .toDO),
+                                                              (name: "하고 있는 일", status: .inProgress),
+                                                              (name: "완료한 일", status: .done)]
         
         statuses.enumerated().forEach { index, status in
-            let cardListVC = CardListViewController(headerTitle: status.0, cardManager: cardManager, cardStatus: status.1)
+            let cardListVC = CardListViewController(headerTitle: status.name, cardManager: cardManager, cardStatus: status.status)
             addChild(cardListVC)
             stackView.addArrangedSubview(cardListVC.view)
             cardListVC.didMove(toParent: self)
