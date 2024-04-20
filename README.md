@@ -96,3 +96,66 @@ https://djgmd1021.tistory.com/143
 
 </div>
 </details>
+
+<details>
+<summary>Context Menu</summary>
+
+## 🎯주요 작업
+
+- [x]  ContextMenu
+    - [x]  완료한 일로 이동
+    - [x]  수정하기
+    - [x]  삭제하기
+        - [x]  Swipe Delete
+
+## 📚학습 키워드
+
+### Context Menu
+
+사용자가 앱 내의 특정 요소를 3D Touch제스처를 통해 접근할 수 있는 메뉴이다.
+
+iOS 13부터 직관적이고, 접근성이 높은 상호작용을 가능하게 되었음.
+
+지금 사용하는 UIKit에서 `UIContextMenuInteraction` 를 사용하여 컨텍스트 메뉴를 구현가능
+
+### 3D Touch
+
+화면을 누르는 힘의 강도를 감지하여 다양한 기능을 실행할 수 있게 해주는 상호작용 기능
+
+화면 아래에 있는 압력 감지 센서를 통해 실행됨
+
+### Squash & Merger
+
+Squash는 여러개 커밋을 하나로 합친다. Squash 자체가 으깨다, 짓누르다 뜻을 가진다.
+
+병합할 브랜치의 모든 커밋을 Squash한 새로운 커밋으로 Base 브랜치에 추가하는 방식
+
+### Swipe Delete
+
+```swift
+func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard let card = self.cardManager.card(for: self.cardStatus, at: indexPath.row) else { return }
+                // 배열에서 indexPath.row에 해당하는 값 제거하기       
+        self.cardManager.removeCard(by: card.id)
+        // 해당 cell을 tableview에서 없애기(UI적 요소)
+        tableView.deleteRows(at: [indexPath], with: .fade)
+    }
+```
+
+## 💻고민과 해결
+
+### 수정하기 기능 구현과정에서 `Thread 1: Fatal error: Unexpectedly found nil while implicitly unwrapping an Optional value`  에러가 발생
+
+ `loadViewIfNeeded()` 에 대해 공부하면서 문제를 해결 할 수 있었다.
+
+뷰컨트롤러의 뷰가 로드되기 전에는 editView 프로퍼티가 아직 생성되지 않아서 EditViewController에서 editView를 직접 참조하려고 할 때, nil을 참조하게 되어서 에러가 발생되었다. 
+
+그래서 loadViewIfNeeded() 사용해서 뷰컨트롤러가 뷰를 즉시 로드를 강제하여서, viewDidLoad()가 호출될 때까지 기다리지 않고 준비된 상태로 보장한다.
+
+첫번째로 하드코딩으로 구현해서, 두번째로 뷰 컨트롤러의 생명주기를 이해를 완전히 못해서 발생한 에러라고 생각합니다. 다음에는 뷰 로드 → 초기화를 매끄럽게 구현하는 방법을 우선적으로 생각해봐야겠다는 고민을 하게 되었습니다.
+
+## 🤔결과
+![4주차결과](https://github.com/codesquad-members-2024/swift-todo/assets/104732020/ae79c117-1e01-46c9-ab37-b8113db3aa8b)
+
+</div>
+</details>
