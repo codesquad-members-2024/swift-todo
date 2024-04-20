@@ -92,7 +92,7 @@ class CardListViewController: UIViewController {
     }
     
     private func addNewCard() {
-        let editVC = EditViewController(cardManager: cardManager as! CardManager, cardStatus: self.cardStatus)
+        let editVC = EditViewController(cardManager: self.cardManager, cardStatus: self.cardStatus)
         editVC.modalPresentationStyle = .overFullScreen
         
         self.present(editVC, animated: true)
@@ -120,16 +120,12 @@ class CardListViewController: UIViewController {
     
     @objc private func handleCardMoved(notification: Notification) {
         guard let userInfo = notification.userInfo,
-                  let cardId = userInfo["cardId"] as? UUID,
-                  let card = cardManager.card(for: cardStatus, with: cardId),
-                  let newIndex = cardManager.index(of: card, in: cardStatus) else { return }
+              let cardId = userInfo["cardId"] as? UUID,
+              let indexInfo = userInfo["indexInfo"] as? (oldIndex: Int, newIndex: Int) else { return }
         
-        if let oldIndex = tableView.indexPathsForVisibleRows?.first(where: { indexPath in
-            guard let visibleCard = cardManager.card(for: cardStatus, at: indexPath.row) else { return false }
-            return visibleCard.id == cardId
-        }) {
-            tableView.moveRow(at: oldIndex, to: IndexPath(row: newIndex, section: 0))
-        }
+        let oldIndex = IndexPath(row: indexInfo.oldIndex, section: 0)
+        let newIndex = IndexPath(row: indexInfo.newIndex, section: 0)
+        tableView.moveRow(at: oldIndex, to: newIndex)
         self.tableView.reloadData()
     }
     
@@ -163,7 +159,7 @@ extension CardListViewController: UITableViewDataSource, UITableViewDelegate {
         guard let card = self.cardManager.card(for: self.cardStatus, at: indexPath.row) else { return }
         self.cardManager.removeCard(by: card.id)
         tableView.deleteRows(at: [indexPath], with: .fade)
-        }
+    }
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
